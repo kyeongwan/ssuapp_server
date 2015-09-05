@@ -35,6 +35,49 @@ var AuthController = {
     pluralize: false,
   },
 
+ /**
+   * [bearer description]
+   * @param  {[type]} req [description]
+   * @param  {[type]} res [description]
+   * @return {[type]}     [description]
+   */
+  getAccessToken: function (req, res) {
+   passport.callback(req, res, function (err, user, challenges, statuses) {
+      if (err) {
+        return res.serverError();
+      }
+
+      if (!user) {
+        return res.badRequest("User doesn't exist");
+      }
+
+      req.login(user, function (err) {
+        if (err) {
+          return res.serverError();
+        }
+        
+        Passport
+          .findOne({
+            protocol: 'local',
+            user: user.id,
+          })
+          .exec(function (error, passport) {
+            if (error) {
+              return res.serverError(error);
+            }
+
+            if (!passport) {
+              return res.badRequest("Passport doesn't exist");
+            }
+
+            res.ok(passport.getAccessToken());
+          });
+      });
+    });
+  },
+
+
+
   login: function (req, res) {
     var strategies = sails.config.passport
       , providers  = {};
@@ -146,7 +189,19 @@ var AuthController = {
       // If an error was thrown, redirect the user to the
       // login, register or disconnect action initiator view.
       // These views should take care of rendering the error messages.
-      var action = req.param('action');
+
+
+            
+
+
+      var action = req.param('action'), 
+      device = req.param('device');
+
+      if (device) {
+        return res.ok({
+          error: req.flash('error')[0]
+          });
+      }
 
       switch (action) {
         case 'register':
@@ -171,11 +226,15 @@ var AuthController = {
         }
         
         // Mark the session as authenticated to work with default Sails sessionAuth.js policy
-        req.session.authenticated = true
-        
-        // Upon successful login, send the user to the homepage were req.user
-        // will be available.
-        res.redirect('/');
+        req.session.authenticated = true;
+    
+        if (req.param('device')) {
+                    res.ok(user);
+          } else {
+            // Upon successful login, send the user to the homepage were req.user
+            // will be available.
+          res.redirect('/');
+        }
       });
     });
   },
@@ -188,7 +247,7 @@ var AuthController = {
    */
   disconnect: function (req, res) {
     passport.disconnect(req, res);
-  }
+  },
 };
 
 module.exports = AuthController;

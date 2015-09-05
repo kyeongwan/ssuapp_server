@@ -6,11 +6,7 @@
  */
 
 module.exports = {
-	_config: {
-		rest: true,
-		pluralize: true,
-	},
-
-	
+	me: function (req, res) {
+    res.ok(req.user);
+  }
 };
-

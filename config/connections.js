@@ -80,6 +80,7 @@ module.exports.connections = {
     user: 'kdhsgnjhqznmxm',
     password: '_Vp0TMMRnafSJT483g1iZbl-XX',
     database: 'd8k5e64gs017r3',
+    port: 5432,
     pool: false,
     maxPool: 20,
     ssl: true,

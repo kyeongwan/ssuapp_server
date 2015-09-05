@@ -4,14 +4,32 @@
 * @description :: TODO: You might write a short summary of how this model works and what it represents here.
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
+
+var validator = require('validator'),
+    async = require('async');
+
 var User = {
   // Enforce model schema in the case of schemaless databases
   schema: true,
 
   attributes: {
-    username  : { type: 'string', unique: true },
-    email     : { type: 'email',  unique: true },
-    passports : { collection: 'Passport', via: 'user' }
+  	/**
+     * 학번
+     * @type {Object}
+     */
+  	idnumber: {
+      	type: 'integer',
+    	min: 8, max: 8,
+	    defaultsTo: 20000000,
+    },
+    /**
+    * 비밀번호
+    * @type {Object}
+    */
+    passports : {
+      	collection: 'Passport',
+       	via: 'user'
+    }
   }
 };
 
