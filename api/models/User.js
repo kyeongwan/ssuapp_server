@@ -19,7 +19,7 @@ var User = {
      */
   	idnumber: {
       	type: 'integer',
-    	min: 8, max: 8,
+      	min: 20000000, max: 30000000,
 	    defaultsTo: 20000000,
     },
     /**

@@ -21,13 +21,13 @@ module.exports = {
  	/** @type {Object} 레시피가 받은 좋아요 */
 	likes: {
  	    collection: 'Like',
-		via: 'recipes',
+		via: 'restaurant',
 	},
 
 	/** @type {Object} 조회 기록 */
 	views: {
 	    collection: 'View',
-      	via: 'recipes',
+      	via: 'restaurant',
     }
 
   }

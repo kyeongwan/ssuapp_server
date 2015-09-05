@@ -5,7 +5,7 @@ module.exports = {
   attributes: {
 		restaurant: {
       	model: 'Restaurant',
-      	required: true,
+      	required: true,	
     },
  		 
     /** @type {Object} 유저 */
