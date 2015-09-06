@@ -7,9 +7,10 @@ module.exports = {
 	    minLength: 4, maxLength: 255,
     },
 
+     /** @type {Object} 레시피가 가지는 식감 */
     menu: {
-      	type: 'text',
-      	minLength: 10,
+      collection: 'Menu',
+      via: 'restaurant',
     },
 
     /** @type {Object} 레시피 썸네일 */

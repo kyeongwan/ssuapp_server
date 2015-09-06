@@ -17,10 +17,11 @@ var User = {
      * 학번
      * @type {Object}
      */
-  	idnumber: {
-      	type: 'integer',
-      	min: 20000000, max: 30000000,
-	    defaultsTo: 20000000,
+    username: {
+        type: 'string',
+        unique: true,
+        minLength: 8,
+        maxLength: 8
     },
     /**
     * 비밀번호

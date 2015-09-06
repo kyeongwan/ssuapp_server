@@ -20,10 +20,10 @@ module.exports = {
   // models: {
   //   connection: 'someMysqlServer'
   // },
-  // models: {
-  //   connection: 'somePostgresqlServer',
-  //   migrate: 'safe',
-  // },
+   models: {
+     connection: 'somePostgresqlServer',
+     migrate: 'safe',
+   },
 
   /***************************************************************************
    * Set the port in the production environment to 80                        *

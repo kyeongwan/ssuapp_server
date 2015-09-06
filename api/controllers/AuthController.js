@@ -35,6 +35,10 @@ var AuthController = {
     pluralize: false,
   },
 
+
+  me: function(req, res) {
+        res.ok(req.user);
+    },
  /**
    * [bearer description]
    * @param  {[type]} req [description]

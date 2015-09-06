@@ -81,9 +81,9 @@ passport.connect = function (req, query, profile, next) {
 
   // If the profile object contains a list of emails, grab the first one and
   // add it to the user.
-  if (profile.hasOwnProperty('emails')) {
-    user.email = profile.emails[0].value;
-  }
+  // if (profile.hasOwnProperty('emails')) {
+  //   user.email = profile.emails[0].value;
+  // }
   // If the profile object contains a username, add it to the user.
   if (profile.hasOwnProperty('username')) {
     user.username = profile.username;
@@ -92,8 +92,10 @@ passport.connect = function (req, query, profile, next) {
   // If neither an email or a username was available in the profile, we don't
   // have a way of identifying the user in the future. Throw an error and let
   // whoever's next in the line take care of it.
-  if (!user.username && !user.email) {
-    return next(new Error('Neither a username nor email was available'));
+
+  //if (!user.username && !user.email) {
+  if (!user.username) {
+    return next(new Error('Neither a username was available'));
   }
 
   Passport.findOne({
@@ -227,7 +229,7 @@ passport.callback = function (req, res, next) {
   // Passport.js wasn't really built for local user registration, but it's nice
   // having it tied into everything else.
   if (provider === 'local' && action !== undefined) {
-    if (action === 'register' && !req.user) {
+    if (action === 'register') {
       this.protocols.local.register(req, res, next);
     }
     else if (action === 'connect' && req.user) {
