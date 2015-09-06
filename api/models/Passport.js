@@ -1,4 +1,5 @@
 var bcrypt = require('bcryptjs');
+var crypto = require('crypto');
 
 /**
  * Hash a passport password.
