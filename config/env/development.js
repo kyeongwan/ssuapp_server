@@ -18,8 +18,8 @@ module.exports = {
    ***************************************************************************/
 
    models: {
-     connection: 'someMongodbServer'
-     migrate: 'safe',
+     connection: 'somePostgresqlServer',
+     migrate: 'safe'
    }
 
 };
